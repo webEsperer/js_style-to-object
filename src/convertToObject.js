@@ -16,17 +16,19 @@ function convertToObject(sourceString) {
 
   arrayOfStyles.forEach((item) => {
     const colon = item.indexOf(':');
-    const key = item.slice(0, colon).trim();
-    let value = item.slice(colon + 1).trim();
 
-    if (value.indexOf(',') !== -1) {
-      value = value
-        .split(',')
-        .map((itemValue) => itemValue.trim())
-        .join(',\n          ');
+    if (colon !== -1) {
+      const key = item.slice(0, colon).trim();
+      let value = item.slice(colon + 1).trim();
+
+      if (value.indexOf(',') !== -1) {
+        value = value
+          .split(',')
+          .map((itemValue) => itemValue.trim())
+          .join(',\n          ');
+      }
+      stylesObject[key] = value;
     }
-
-    stylesObject[key] = value;
   });
 
   return stylesObject;
